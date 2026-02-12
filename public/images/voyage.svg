@@ -1,0 +1,13 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g3" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE9F7" />
+      <stop offset="1" stop-color="#FFF7D9" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g3)"/>
+  <path d="M150 560C330 420 510 680 680 520C840 370 1010 570 1130 470" stroke="#D4AF7F" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="280" cy="210" r="90" fill="#F8B2CD" opacity="0.6"/>
+  <circle cx="860" cy="250" r="120" fill="#F9D9B0" opacity="0.45"/>
+  <text x="600" y="690" text-anchor="middle" fill="#6B2F4F" font-family="Georgia, serif" font-size="62">Notre Premier Voyage</text>
+</svg>

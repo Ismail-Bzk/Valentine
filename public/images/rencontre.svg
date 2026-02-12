@@ -1,0 +1,13 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE3EF" />
+      <stop offset="1" stop-color="#FFF7EE" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g1)"/>
+  <circle cx="220" cy="170" r="130" fill="#F9BCD2" opacity="0.55"/>
+  <circle cx="940" cy="610" r="180" fill="#F9D8B4" opacity="0.35"/>
+  <path d="M600 420C600 380 550 360 520 396C490 360 440 380 440 420C440 468 500 512 520 550C540 512 600 468 600 420Z" fill="#F49EC0"/>
+  <text x="600" y="690" text-anchor="middle" fill="#6B2F4F" font-family="Georgia, serif" font-size="62">Notre Premiere Rencontre</text>
+</svg>

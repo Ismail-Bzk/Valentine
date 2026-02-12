@@ -1,0 +1,13 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF5E9" />
+      <stop offset="1" stop-color="#FFE9F4" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g2)"/>
+  <rect x="250" y="220" width="700" height="360" rx="40" fill="#FFFFFF" opacity="0.75"/>
+  <path d="M420 500H780" stroke="#D4AF7F" stroke-width="16" stroke-linecap="round"/>
+  <path d="M480 430C480 390 530 370 560 406C590 370 640 390 640 430C640 478 580 522 560 560C540 522 480 478 480 430Z" fill="#F6A9C5"/>
+  <text x="600" y="150" text-anchor="middle" fill="#6B2F4F" font-family="Georgia, serif" font-size="62">Premier Rendez-vous</text>
+</svg>

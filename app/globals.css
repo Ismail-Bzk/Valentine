@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: only light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body), sans-serif;
+  overflow-x: hidden;
+  background: linear-gradient(160deg, #fffaf7 0%, #fff0f6 45%, #ffe6ef 100%);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-romantic), serif;
+  letter-spacing: 0.02em;
+}
+
+.bg-romantic-gradient {
+  background: linear-gradient(120deg, #ffe8f1, #fff8f2, #ffe0ea, #fff1f8);
+  background-size: 300% 300%;
+  animation: romanticGradient 18s ease infinite;
+}
+
+.glass-panel {
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(212, 175, 127, 0.25);
+}
+
+.section-title {
+  @apply text-4xl font-semibold md:text-5xl;
+}
+
+@keyframes romanticGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.blinking-cursor {
+  animation: blink 1s step-end infinite;
+}

@@ -1,0 +1,13 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE9EE" />
+      <stop offset="1" stop-color="#FFF9F1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g4)"/>
+  <rect x="320" y="260" width="560" height="290" rx="24" fill="#FFFFFF" opacity="0.7"/>
+  <rect x="380" y="480" width="440" height="35" rx="14" fill="#F5B0C8"/>
+  <rect x="450" y="330" width="300" height="150" rx="18" fill="#F8DCC0"/>
+  <text x="600" y="170" text-anchor="middle" fill="#6B2F4F" font-family="Georgia, serif" font-size="62">Une Annee d Amour</text>
+</svg>

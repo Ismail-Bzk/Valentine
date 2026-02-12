@@ -1,0 +1,13 @@
+<svg width="900" height="900" viewBox="0 0 900 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="900" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE7F1"/>
+      <stop offset="1" stop-color="#FFF5E9"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="900" fill="url(#bg4)"/>
+  <circle cx="220" cy="220" r="96" fill="#F7B4CD" opacity="0.45"/>
+  <circle cx="670" cy="680" r="132" fill="#F9D7B2" opacity="0.3"/>
+  <path d="M520 500C520 460 470 440 440 476C410 440 360 460 360 500C360 548 420 592 440 630C460 592 520 548 520 500Z" fill="#F3A6C3"/>
+  <text x="450" y="130" text-anchor="middle" fill="#6B2F4F" font-family="Georgia, serif" font-size="58">Souvenir 4</text>
+</svg>

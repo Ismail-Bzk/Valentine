@@ -1,0 +1,12 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g5" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF5F9" />
+      <stop offset="1" stop-color="#FFECD9" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g5)"/>
+  <circle cx="600" cy="380" r="220" fill="#FFFFFF" opacity="0.65"/>
+  <path d="M730 430C730 380 670 350 630 395C590 350 530 380 530 430C530 490 605 545 630 600C655 545 730 490 730 430Z" fill="#F49FC0"/>
+  <text x="600" y="170" text-anchor="middle" fill="#6B2F4F" font-family="Georgia, serif" font-size="62">Toujours Nous</text>
+</svg>
