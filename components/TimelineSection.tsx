@@ -41,7 +41,9 @@ export function TimelineSection() {
                       {event.date}
                     </span>
                     <h3 className="mt-3 text-3xl text-wine">{event.title}</h3>
-                    <p className="mt-2 text-base leading-relaxed text-wine/80">{event.description}</p>
+                    <p className="mt-2 whitespace-pre-line text-base leading-relaxed text-wine/80">
+                      {event.description}
+                    </p>
                   </div>
 
                   <div

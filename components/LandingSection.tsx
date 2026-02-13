@@ -23,7 +23,7 @@ export function LandingSection() {
           transition={{ duration: 0.8 }}
           className="rounded-full border border-gold/30 bg-white/70 px-4 py-1 text-sm uppercase tracking-[0.2em] text-wine/70"
         >
-          Saint-Valentin
+          7_Abtal & Batala
         </motion.p>
 
         <motion.h1
@@ -49,7 +49,7 @@ export function LandingSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          <DayCounter since="2022-02-14" />
+          <DayCounter since="2025-06-06" />
         </motion.div>
 
         <motion.button

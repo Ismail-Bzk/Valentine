@@ -6,7 +6,7 @@ import { CanvasHearts } from '@/components/CanvasHearts';
 import { FireworksCanvas } from '@/components/FireworksCanvas';
 import { PasswordGate } from '@/components/PasswordGate';
 
-const FALLBACK_PASSWORD = '14-02-2022';
+const FALLBACK_PASSWORD = '06-06-2025';
 
 type MusicEngine = {
   context: AudioContext;

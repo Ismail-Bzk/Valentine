@@ -19,7 +19,7 @@ export function DayCounter({ since }: DayCounterProps) {
   return (
     <div className="glass-panel inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm text-wine/90 shadow-romantic md:text-base">
       <span className="h-2 w-2 rounded-full bg-rose animate-soft-pulse" />
-      {days} jours deja a s aimer depuis le {since}
+      {days} jours déjà à s’aimer depuis le {since}
     </div>
   );
 }
