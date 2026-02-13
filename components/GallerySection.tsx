@@ -58,15 +58,15 @@ export function GallerySection() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.92 }}
               transition={{ duration: 0.35 }}
-              className="relative max-h-[85vh] w-full max-w-4xl overflow-hidden rounded-2xl border border-white/20"
+              className="relative h-[85vh] w-full max-w-4xl overflow-hidden rounded-2xl border border-white/20 bg-black/35"
               onClick={(event) => event.stopPropagation()}
             >
               <Image
                 src={galleryItems[selectedIndex].src}
                 alt={galleryItems[selectedIndex].alt}
-                width={1600}
-                height={1200}
-                className="max-h-[85vh] w-full object-cover"
+                fill
+                sizes="(max-width: 768px) 95vw, 80vw"
+                className="object-contain"
               />
 
               <button

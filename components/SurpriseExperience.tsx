@@ -36,32 +36,89 @@ export function SurpriseExperience() {
     if (engineRef.current) return;
 
     const context = new window.AudioContext();
-    const notes = [261.63, 329.63, 392.0, 523.25, 440.0, 392.0, 329.63, 293.66];
-    const step = 0.28;
+    if (context.state === 'suspended') {
+      await context.resume();
+    }
+
+    const masterGain = context.createGain();
+    masterGain.gain.value = 0.16;
+    masterGain.connect(context.destination);
+
+    const lowpass = context.createBiquadFilter();
+    lowpass.type = 'lowpass';
+    lowpass.frequency.value = 1800;
+    lowpass.Q.value = 0.8;
+    lowpass.connect(masterGain);
+
+    const chords = [
+      [261.63, 329.63, 392.0], // C major
+      [220.0, 261.63, 329.63], // A minor
+      [246.94, 293.66, 369.99], // B diminished flavor
+      [196.0, 246.94, 329.63], // G major
+    ];
+
+    const melody = [
+      [392.0, 440.0, 493.88, 523.25],
+      [440.0, 392.0, 349.23, 329.63],
+      [369.99, 392.0, 440.0, 392.0],
+      [349.23, 329.63, 293.66, 261.63],
+    ];
+
+    const barDuration = 2.4;
+    const loopDuration = barDuration * chords.length;
+
+    const playPad = (freq: number, start: number, duration: number) => {
+      const osc = context.createOscillator();
+      const gain = context.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, start);
+
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.03, start + 0.35);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+
+      osc.connect(gain);
+      gain.connect(lowpass);
+      osc.start(start);
+      osc.stop(start + duration + 0.02);
+    };
+
+    const playLead = (freq: number, start: number, duration: number) => {
+      const osc = context.createOscillator();
+      const gain = context.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, start);
+
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.07, start + 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+
+      osc.connect(gain);
+      gain.connect(lowpass);
+      osc.start(start);
+      osc.stop(start + duration + 0.02);
+    };
 
     const playSequence = () => {
-      const baseTime = context.currentTime;
+      const baseTime = context.currentTime + 0.02;
 
-      notes.forEach((freq, index) => {
-        const oscillator = context.createOscillator();
-        const gain = context.createGain();
+      chords.forEach((chord, barIndex) => {
+        const barStart = baseTime + barIndex * barDuration;
+        chord.forEach((freq) => playPad(freq, barStart, barDuration * 0.95));
 
-        oscillator.type = 'sine';
-        oscillator.frequency.value = freq;
-
-        gain.gain.setValueAtTime(0.0001, baseTime + index * step);
-        gain.gain.exponentialRampToValueAtTime(0.07, baseTime + index * step + 0.03);
-        gain.gain.exponentialRampToValueAtTime(0.0001, baseTime + index * step + 0.22);
-
-        oscillator.connect(gain);
-        gain.connect(context.destination);
-        oscillator.start(baseTime + index * step);
-        oscillator.stop(baseTime + index * step + 0.23);
+        const phrase = melody[barIndex];
+        const noteDuration = barDuration / phrase.length;
+        phrase.forEach((noteFreq, noteIndex) => {
+          const noteStart = barStart + noteIndex * noteDuration;
+          playLead(noteFreq, noteStart, noteDuration * 0.9);
+        });
       });
     };
 
     playSequence();
-    const timer = window.setInterval(playSequence, notes.length * step * 1000 + 250);
+    const timer = window.setInterval(playSequence, loopDuration * 1000);
     engineRef.current = { context, timer };
     setIsMusicOn(true);
   }, []);
