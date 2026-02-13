@@ -7,6 +7,7 @@ import { FireworksCanvas } from '@/components/FireworksCanvas';
 import { PasswordGate } from '@/components/PasswordGate';
 
 const FALLBACK_PASSWORD = '06-06-2025';
+const LEGACY_PASSWORD = '14-02-2022';
 
 type MusicEngine = {
   context: AudioContext;
@@ -80,10 +81,19 @@ export function SurpriseExperience() {
     await startMusic();
   };
 
+  const configuredPassword = process.env.NEXT_PUBLIC_SURPRISE_PASSWORD?.trim();
+  const expectedPasswords = Array.from(
+    new Set(
+      [configuredPassword, FALLBACK_PASSWORD, LEGACY_PASSWORD].filter(
+        (value): value is string => Boolean(value && value.length > 0),
+      ),
+    ),
+  );
+
   if (!unlocked) {
     return (
       <PasswordGate
-        expectedPassword={process.env.NEXT_PUBLIC_SURPRISE_PASSWORD ?? FALLBACK_PASSWORD}
+        expectedPasswords={expectedPasswords}
         onUnlock={() => setUnlocked(true)}
       />
     );

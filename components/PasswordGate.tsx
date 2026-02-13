@@ -3,11 +3,11 @@
 import { FormEvent, useState } from 'react';
 
 type PasswordGateProps = {
-  expectedPassword: string;
+  expectedPasswords: string[];
   onUnlock: () => void;
 };
 
-export function PasswordGate({ expectedPassword, onUnlock }: PasswordGateProps) {
+export function PasswordGate({ expectedPasswords, onUnlock }: PasswordGateProps) {
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
 
@@ -28,10 +28,14 @@ export function PasswordGate({ expectedPassword, onUnlock }: PasswordGateProps) 
     return false;
   };
 
+  const matchesAnyPassword = (input: string, expectedList: string[]) => {
+    return expectedList.some((expected) => isPasswordMatch(input, expected));
+  };
+
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (isPasswordMatch(value, expectedPassword)) {
+    if (matchesAnyPassword(value, expectedPasswords)) {
       setError('');
       onUnlock();
       return;
