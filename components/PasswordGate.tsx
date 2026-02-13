@@ -11,16 +11,33 @@ export function PasswordGate({ expectedPassword, onUnlock }: PasswordGateProps) 
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
 
+  const isPasswordMatch = (input: string, expected: string) => {
+    const cleanInput = input.trim();
+    const cleanExpected = expected.trim();
+
+    if (cleanInput === cleanExpected) return true;
+
+    // Date-friendly fallback: 06-06-2025, 06/06/2025, 06 06 2025, 06062025
+    const inputDigits = cleanInput.replace(/\D/g, '');
+    const expectedDigits = cleanExpected.replace(/\D/g, '');
+
+    if (inputDigits.length > 0 && expectedDigits.length > 0) {
+      return inputDigits === expectedDigits;
+    }
+
+    return false;
+  };
+
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (value.trim() === expectedPassword.trim()) {
+    if (isPasswordMatch(value, expectedPassword)) {
       setError('');
       onUnlock();
       return;
     }
 
-    setError('Mot de passe incorrect. Reessaie avec notre date speciale.');
+    setError('Mot de passe incorrect. Essaie la date au format JJ-MM-AAAA.');
   };
 
   return (
@@ -38,7 +55,7 @@ export function PasswordGate({ expectedPassword, onUnlock }: PasswordGateProps) 
           type="password"
           value={value}
           onChange={(event) => setValue(event.target.value)}
-          placeholder="Exemple: 14-02-2022"
+          placeholder="Exemple: 06-06-2025"
           className="mt-6 w-full rounded-xl border border-white/20 bg-black/20 px-4 py-3 text-base text-white placeholder:text-white/40 focus:border-rose focus:outline-none"
         />
 

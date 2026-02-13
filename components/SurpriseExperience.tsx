@@ -114,7 +114,7 @@ export function SurpriseExperience() {
           transition={{ duration: 1, delay: 0.35 }}
           className="mx-auto mt-7 max-w-2xl text-lg text-white/85 md:text-xl"
         >
-          Merci pour chaque sourire, chaque main tendue, chaque instant. Je t aime aujourd hui, demain, et encore apres.
+          Merci pour chaque sourire, chaque main tendue, chaque instant. Je t’aime aujourd’hui, demain, et aussi loin que la vie nous portera.
         </motion.p>
 
         <motion.button
