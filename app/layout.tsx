@@ -6,14 +6,17 @@ import { PageTransition } from '@/components/PageTransition';
 
 const romanticFont = Cormorant_Garamond({
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-romantic',
   display: 'swap',
 });
 
 const bodyFont = Nunito_Sans({
   subsets: ['latin'],
+  weight: ['400', '600', '700'],
   variable: '--font-body',
   display: 'swap',
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
