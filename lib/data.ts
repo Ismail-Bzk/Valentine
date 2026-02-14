@@ -33,7 +33,7 @@ export const timelineEvents: TimelineEvent[] = [
     image: '/us/voyage.JPG',
   },
   {
-    date: '01 Janvier 2025',
+    date: '01 Janvier 2026',
     title: 'Deuxième Voyage : Marrakech',
     description:
       'Marrakech, cœur de nos racines. Les rues en fête, les matchs du Maroc et la ville entière qui vibrait.\nEntre Jemaa el Fna, ses couleurs d’un côté, et la tangia, la Night Life de l’autre.\nUn voyage cette fois vivant, avec ses éclats, ses moments suspendus, mais aussi ses hauts et ses bas vers la fin.\nUn voyage où chaque instant, lumineux ou plus fragile, ajoutait un fil de plus à notre histoire.',
