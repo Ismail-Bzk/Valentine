@@ -8,130 +8,51 @@ import { PasswordGate } from '@/components/PasswordGate';
 
 const FALLBACK_PASSWORD = '06-06-2025';
 const LEGACY_PASSWORD = '14-02-2022';
-
-type MusicEngine = {
-  context: AudioContext;
-  timer: number;
-};
+const MUSIC_TRACK_PATH = '/audio/notre-musique.mp3';
 
 export function SurpriseExperience() {
   const [unlocked, setUnlocked] = useState(false);
   const [isMusicOn, setIsMusicOn] = useState(false);
-  const engineRef = useRef<MusicEngine | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const stopMusic = useCallback(async () => {
-    const engine = engineRef.current;
-    if (!engine) {
+  const stopMusic = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) {
       setIsMusicOn(false);
       return;
     }
 
-    window.clearInterval(engine.timer);
-    await engine.context.close();
-    engineRef.current = null;
+    audio.pause();
+    audio.currentTime = 0;
     setIsMusicOn(false);
   }, []);
 
   const startMusic = useCallback(async () => {
-    if (engineRef.current) return;
+    try {
+      if (!audioRef.current) {
+        const audio = new Audio(MUSIC_TRACK_PATH);
+        audio.loop = true;
+        audio.preload = 'auto';
+        audio.volume = 0.55;
+        audioRef.current = audio;
+      }
 
-    const context = new window.AudioContext();
-    if (context.state === 'suspended') {
-      await context.resume();
+      await audioRef.current.play();
+      setIsMusicOn(true);
+    } catch {
+      setIsMusicOn(false);
     }
-
-    const masterGain = context.createGain();
-    masterGain.gain.value = 0.16;
-    masterGain.connect(context.destination);
-
-    const lowpass = context.createBiquadFilter();
-    lowpass.type = 'lowpass';
-    lowpass.frequency.value = 1800;
-    lowpass.Q.value = 0.8;
-    lowpass.connect(masterGain);
-
-    const chords = [
-      [261.63, 329.63, 392.0], // C major
-      [220.0, 261.63, 329.63], // A minor
-      [246.94, 293.66, 369.99], // B diminished flavor
-      [196.0, 246.94, 329.63], // G major
-    ];
-
-    const melody = [
-      [392.0, 440.0, 493.88, 523.25],
-      [440.0, 392.0, 349.23, 329.63],
-      [369.99, 392.0, 440.0, 392.0],
-      [349.23, 329.63, 293.66, 261.63],
-    ];
-
-    const barDuration = 2.4;
-    const loopDuration = barDuration * chords.length;
-
-    const playPad = (freq: number, start: number, duration: number) => {
-      const osc = context.createOscillator();
-      const gain = context.createGain();
-
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, start);
-
-      gain.gain.setValueAtTime(0.0001, start);
-      gain.gain.exponentialRampToValueAtTime(0.03, start + 0.35);
-      gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-
-      osc.connect(gain);
-      gain.connect(lowpass);
-      osc.start(start);
-      osc.stop(start + duration + 0.02);
-    };
-
-    const playLead = (freq: number, start: number, duration: number) => {
-      const osc = context.createOscillator();
-      const gain = context.createGain();
-
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, start);
-
-      gain.gain.setValueAtTime(0.0001, start);
-      gain.gain.exponentialRampToValueAtTime(0.07, start + 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-
-      osc.connect(gain);
-      gain.connect(lowpass);
-      osc.start(start);
-      osc.stop(start + duration + 0.02);
-    };
-
-    const playSequence = () => {
-      const baseTime = context.currentTime + 0.02;
-
-      chords.forEach((chord, barIndex) => {
-        const barStart = baseTime + barIndex * barDuration;
-        chord.forEach((freq) => playPad(freq, barStart, barDuration * 0.95));
-
-        const phrase = melody[barIndex];
-        const noteDuration = barDuration / phrase.length;
-        phrase.forEach((noteFreq, noteIndex) => {
-          const noteStart = barStart + noteIndex * noteDuration;
-          playLead(noteFreq, noteStart, noteDuration * 0.9);
-        });
-      });
-    };
-
-    playSequence();
-    const timer = window.setInterval(playSequence, loopDuration * 1000);
-    engineRef.current = { context, timer };
-    setIsMusicOn(true);
   }, []);
 
   useEffect(() => {
     return () => {
-      void stopMusic();
+      stopMusic();
     };
   }, [stopMusic]);
 
   const toggleMusic = async () => {
     if (isMusicOn) {
-      await stopMusic();
+      stopMusic();
       return;
     }
 
